@@ -71,6 +71,10 @@ ruleTester.run("require-remove-eventlistener", rule, {
                 this.removeEventListener('click', this.doSomething);
                 this.div  = document.createElement('div');
                 this.div.removeEventListener('click', this.doSomething);
+                let Constants = { SaveEvent : 'saveEvent' };
+                let SaveEvent = 'SaveEvent';
+                this.removeEventListener(Constants.SaveEvent, this.doSomething);
+                document.removeEventListener(SaveEvent, this.doSomething);
             }
         };
         `,
@@ -84,6 +88,12 @@ ruleTester.run("require-remove-eventlistener", rule, {
             {
                 message: "No corresponding addEventListener found for the div.removeEventListener('click', doSomething)",
             },
+            {
+                message: "No corresponding addEventListener found for the this.removeEventListener('Constants.SaveEvent', doSomething)",
+            },
+            {
+                message: "No corresponding addEventListener found for the document.removeEventListener('SaveEvent', doSomething)",
+            },
 
         ]
     }, {//Test that inline functions are not used as handlers. This means they cant be removed correctly.
@@ -94,7 +104,26 @@ ruleTester.run("require-remove-eventlistener", rule, {
             { message: `No inline addEventListener handlers allowed. document.addEventListener('click', testFn)` },
             { message: `No inline addEventListener handlers allowed. this.addEventListener('keyup', testFn)` }
         ]
-    }],
+    },
+    { //Test for a constant member expression
+        code: `
+        let Constants= {
+            SaveEvent:"saveEvent",
+        };
+        document.addEventListener(Constants.SaveEvent, globalFN);`,
+        errors: [
+            { message: `EventListener added for 'Constants.SaveEvent' on 'document' but not removed with removeEventListener for handler 'globalFN'` }
+        ]
+    },
+    { //Test for a constant variable
+        code: `
+        let Save = 'saveEvent';
+        document.addEventListener(Save, globalFN);`,
+        errors: [
+            { message: `EventListener added for 'Save' on 'document' but not removed with removeEventListener for handler 'globalFN'` }
+        ]
+    }
+    ],
 });
 
 
