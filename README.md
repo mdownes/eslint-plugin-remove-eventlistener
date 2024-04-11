@@ -11,7 +11,7 @@ Using npm:
 
 Create an eslintrc.js configuration file similar to the following:
 
-```
+```json
 module.exports =
 {
     "parserOptions": {
