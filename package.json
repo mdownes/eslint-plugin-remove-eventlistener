@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-remove-eventlistener",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Require a corresponding removeEventListener for each addEventListener",
   "main": "./lib/index.js",
   "exports": "./lib/index.js",
