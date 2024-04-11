@@ -13,7 +13,8 @@
   "keywords": [
     "eslint",
     "eslintplugin",
-    "eslint-plugin"
+    "eslint-plugin",
+    "require-eventlistener"
   ],
   "files": [
     "lib",
