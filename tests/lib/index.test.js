@@ -87,8 +87,13 @@ ruleTester.run("require-remove-eventlistener", rule, {
 
         ]
     }, {//Test that inline functions are not used as handlers. This means they cant be removed correctly.
-        code: `document.addEventListener('click', function testFn(){});`,
-        errors: [{ message: `No inline addEventListener handlers allowed. document.addEventListener('click', testFn)` }]
+        code: `
+        document.addEventListener('click', function testFn(){});
+        this.addEventListener('keyup', function testFn(){});`,
+        errors: [
+            { message: `No inline addEventListener handlers allowed. document.addEventListener('click', testFn)` },
+            { message: `No inline addEventListener handlers allowed. this.addEventListener('keyup', testFn)` }
+        ]
     }],
 });
 

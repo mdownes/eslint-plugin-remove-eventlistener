@@ -6,12 +6,14 @@ module.exports =
     },
 
     "env": {
-        "es6": true
+        "es6": true,
+        "browser": true,
+        "node": true
     },
     rules: {
         "no-unused-vars": "error",
         "no-undef": "error",
         "semi": 2,
-        
+
     }
 }
