@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-remove-eventlistener",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Require a corresponding removeEventListener for each addEventListener",
   "main": "./lib/index.js",
   "exports": "./lib/index.js",
@@ -16,6 +16,10 @@
     "eslint-plugin",
     "require-eventlistener"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdownes/eslint-plugin-remove-eventlistener.git"
+  },
   "files": [
     "lib",
     "package.json"
