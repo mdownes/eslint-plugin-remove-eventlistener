@@ -122,7 +122,16 @@ ruleTester.run("require-remove-eventlistener", rule, {
         errors: [
             { message: `EventListener added for 'Save' on 'document' but not removed with removeEventListener for handler 'globalFN'` }
         ]
-    }
+    },{ //Test for a constant member expression with an underscore in it
+        code: `
+        let Constants= {
+            SaveEvent:"saveEvent",
+        };
+        document.addEventListener(Constants.Save_Event, globalFN);`,
+        errors: [
+            { message: `EventListener added for 'Constants.Save_Event' on 'document' but not removed with removeEventListener for handler 'globalFN'` }
+        ]
+    },
     ],
 });
 
